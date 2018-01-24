@@ -15,6 +15,7 @@
 
     var infoWindow = new google.maps.InfoWindow({map: map});
     if (navigator.geolocation) {
+      timeout = setTimeout(function runMe() {
       navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
@@ -26,6 +27,9 @@
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');
         map.setCenter(pos);
+        timeout = setTimeout(runMe, 60000);
+      }, 10000);
+
       },
       function() {
         handleLocationError(true, infoWindow, map.getCenter());
