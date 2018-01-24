@@ -28,13 +28,12 @@
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');
         map.setCenter(pos);
-        timeout = setTimeout(runMe, 60000);
-      }, 10000);
-
       },
       function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
+      timeout = setTimeout(runMe, 60000);
+      }, 10000);
     }
     else {
     // Browser doesn't support Geolocation
