@@ -5,6 +5,7 @@
   var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
   var directionsService = new google.maps.DirectionsService();
   var map;
+  var timeout,request;    
   var destino = new google.maps.LatLng(18.0008621,-92.9459908);
 
   function initialize() {
