@@ -6,7 +6,9 @@
   var directionsService = new google.maps.DirectionsService();
   var map;
   var timeout,request;    
+  var heading;
   var destino = new google.maps.LatLng(18.0008621,-92.9459908);
+  var coords;
 
   function initialize() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -16,24 +18,67 @@
 
     var infoWindow = new google.maps.InfoWindow({map: map});
     if (navigator.geolocation) {
+
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        coords = pos.lat + ',' + pos.lng ;			
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(pos.lat, pos.lng),
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 3,            
+            strokeWeight:2,
+            strokeColor:"#B40404"
+         },         
+          map: map
+        });               
+          
+          calcRoute(pos.lat, pos.lng);          
+          //infoWindow.setPosition(pos);
+          //infoWindow.setContent('Location found.');
+          map.setCenter(pos);
+        },
+        function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+
+
+
       timeout = setTimeout(function runMe() {
       navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+      heading = google.maps.geometry.spherical.computeHeading
+                     (parseFloat(coords.split(',')[0]), parseFloat(coords.split(',')[1]), new google.maps.LatLng(pos.lat, pos.lng));						
+                     
+        calcRoute(pos.lat, pos.lng);         
 
-        calcRoute(pos.lat, pos.lng);
-
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(pos.lat, pos.lng),
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 3,
+            rotation: heading,		
+            strokeWeight:2,
+            strokeColor:"#B40404"
+         },         
+          map: map
+        });  
+        coords = pos.lat + ',' + pos.lng ;			
+        //infoWindow.setPosition(pos);
+        //infoWindow.setContent('Location found.');
         map.setCenter(pos);
       },
       function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
       timeout = setTimeout(runMe, 60000);
-      }, 10000);
+      }, 60000);
     }
     else {
     // Browser doesn't support Geolocation
