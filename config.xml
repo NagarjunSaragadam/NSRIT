@@ -4,15 +4,13 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"  id= "com.Mugo.geoLocApp" version   = "1.0.0">
 <name>NSRIT</name>
 <description>
-  Tracking Vehicles of NSRIT 
+  Tracking Vehicles
 </description>
-<author href="#" email="thenagarjun558@gmail.com">S Nagarjun</author>
+<author href="#" email="thenagarjun558@gmail,com">S Nagarjun</author>
         <!--
-            Please read
             If you do not want any permissions to be added to your app, add the
             following tag to your config.xml; you will still have the INTERNET
             permission on your app, which PhoneGap requires.
-
         -->
     <preference name="permissions" value="none"/>
 
