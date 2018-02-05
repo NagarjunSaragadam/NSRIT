@@ -1,64 +1,33 @@
+function watchLocation(successCallback, errorCallback) {
+  successCallback = successCallback || function(){};
+  errorCallback = errorCallback || function(){};
 
-  var rendererOptions = {
-    draggable: false
-    };
-    var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-    var directionsService = new google.maps.DirectionsService();
-    var map;
-    var destino = new google.maps.LatLng(18.0008621,-92.9459908);
-  
-    function initialize() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 17.989456, lng: -92.9475061},
-          zoom: 15
-        });
-  
-      var infoWindow = new google.maps.InfoWindow({map: map});
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-  
-          calcRoute(pos.lat, pos.lng);
-  
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          map.setCenter(pos);
-        },
-        function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
+  // Try HTML5-spec geolocation.
+  var geolocation = navigator.geolocation;
+
+  if (geolocation) {
+    // We have a real geolocation service.
+    try {
+      function handleSuccess(position) {
+        successCallback(position.coords);
       }
-      else {
-      // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                      'Error: The Geolocation service failed.' :
-                      'Error: Your browser doesn\'t support geolocation.');
-                    }
-      directionsDisplay.setMap(map);
-    }
-  
-  
-    function calcRoute(lat, lng) {
-  
-      var origen = new google.maps.LatLng(lat, lng);
-  
-      var request = {
-        origin: origen,
-        destination: destino,
-        travelMode: google.maps.TravelMode.DRIVING
-      };
-      directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-        }
+
+      geolocation.watchPosition(handleSuccess, errorCallback, {
+        enableHighAccuracy: true,
+        maximumAge: 5000 // 5 sec.
       });
+    } catch (err) {
+      errorCallback();
     }
-  
-    google.maps.event.addDomListener(window, 'load', initialize);
+  } else {
+    errorCallback();
+  }
+}
+
+function init() {
+  watchLocation(function(coords) {
+    document.getElementById('map').innerHTML = 'coords: ' + coords.latitude + ',' + coords.longitude;
+  }, function() {
+    document.getElementById('map').innerHTML = 'error';
+  });
+}
