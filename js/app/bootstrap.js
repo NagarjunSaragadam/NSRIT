@@ -10,7 +10,7 @@
 
   var onDeviceReady = function() {
     device_ready = true;
-    alert('dev ready');
+    //alert('dev ready');
     initApp();
   };
 
