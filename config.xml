@@ -38,8 +38,7 @@
 
 
     <!-- Core plugins -->
-    <plugin name="cordova-plugin-geolocation" />
-	
+   <plugin name="cordova-plugin-geolocation" source="npm" />	
 
     <!-- Define app icon for each platform. -->
    
