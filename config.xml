@@ -3,14 +3,10 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"  id= "com.Mugo.geoLocApp" version   = "1.0.0">
 
-    <preference name="phonegap-version" value="cli-6.5.0" />
-    <preference name="android-build-tool" value="gradle" />
-
-    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    <preference name="phonegap-version" value="cli-6.5.0" />        
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
-
     <name>NSRIT</name>
     <description>Tracking Vehicles of NSRIT</description>
     <author href="index.html" email="thenagarjun558@gmail.com">Saragadam Nagarjun</author>
@@ -20,8 +16,7 @@
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
-    <preference name="disallowOverscroll" value="true" />
-    <preference name="prerendered-icon" value="true" />
+    <preference name="disallowOverscroll" value="true" />    
     <preference name="stay-in-webview" value="false" />
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
@@ -32,44 +27,18 @@
     <preference name="android-minSdkVersion" value="10" />
     <preference name="android-targetSdkVersion" value="19" />
     <preference name="android-installLocation" value="auto" />    
-    <gap:plugin name="cordova-plugin-media-capture" source="npm" />
-    
-
-    <icon src="icon.png" />
-
-    
+    <gap:plugin name="cordova-plugin-media-capture" source="npm" />    
     <access origin="*" />
-
     <gap:plugin name=" phonegap-plugin-barcodescanner" source="npm" />
-
-
     <gap:plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
     <gap:plugin name="cordova-plugin-directions" source="npm" />
-
-
-    <gap:config-file platform="ios" parent="NSCameraUsageDescription" overwrite="true">
-        <string>We are using the Camera to scan barcodes</string>
-    </gap:config-file>
-
-    <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription" overwrite="true">
-        <string>We are using the photo library to scan barcodes</string>
-    </gap:config-file>
-
-
-
-
-
     <plugin name="cordova-plugin-whitelist" source="npm" />
-
     <gap:plugin name="cordova-plugin-geolocation" source="npm" />
-
     <feature name="http://api.phonegap.com/1.0/battery" />
     <feature name="http://api.phonegap.com/1.0/camera" />
     <feature name="http://api.phonegap.com/1.0/network" />
     <feature name="http://api.phonegap.com/1.0/notification" />
-
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
-
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
