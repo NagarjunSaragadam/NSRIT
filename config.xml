@@ -33,20 +33,7 @@
     <preference name="android-targetSdkVersion" value="19" />
     <preference name="android-installLocation" value="auto" />    
     <gap:plugin name="cordova-plugin-media-capture" source="npm" />
-    <gap:plugin name="org.apache.cordova.console" source="npm" />    
-
-
-    <gap:plugin name="org.apache.cordova.device-motion" source="npm" />
-    <gap:plugin name="org.apache.cordova.device-orientation" source="npm" />
-    <gap:plugin name="org.apache.cordova.dialogs" source="npm" />
-    <gap:plugin name="org.apache.cordova.file" source="npm" />
-    <gap:plugin name="org.apache.cordova.file-transfer" source="npm" />
-
-    <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" />
-    <gap:plugin name="org.apache.cordova.media" source="npm" />
-    <gap:plugin name="org.apache.cordova.network-information" source="npm" />
-    <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
-    <gap:plugin name="org.apache.cordova.vibration" source="npm" />
+    
 
     <icon src="icon.png" />
 
