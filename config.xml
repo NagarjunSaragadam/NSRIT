@@ -107,7 +107,7 @@
     <icon src="icon.png" gap:platform="ios" width="40" height="40" />
     <icon src="icon.png" gap:platform="ios" width="80" height="80" />
 
-    <plugin name="cordova-plugin-whitelist" version="1" source="npm" />
+    <plugin name="cordova-plugin-whitelist" source="npm" />
 
     <gap:plugin name="cordova-plugin-geolocation" source="npm" />
 
