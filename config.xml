@@ -68,19 +68,7 @@
 		<clobbers target="cordova.plugins.uid" />
 	</js-module>
 
-	<platform name="android">
-		<config-file target="res/xml/config.xml" parent="/*">
-			<feature name="UID">
-				<param name="android-package" value="org.hygieiasoft.cordova.uid.UID" />
-			</feature>
-		</config-file>
-		<config-file target="AndroidManifest.xml" parent="/*">
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-		</config-file>
 
-		<source-file src="src/android/UID.java" target-dir="src/org/hygieiasoft/cordova/uid" />
-	</platform>
 	
 	
 	
@@ -93,6 +81,17 @@
     <allow-intent href="geo:*"/>
     <platform name="android">
         <allow-intent href="market:*"/>
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="UID">
+				<param name="android-package" value="org.hygieiasoft.cordova.uid.UID" />
+			</feature>
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+		</config-file>
+
+		<source-file src="src/android/UID.java" target-dir="src/org/hygieiasoft/cordova/uid" />
     </platform>
     <platform name="ios">
         <allow-intent href="ct:*"/>
