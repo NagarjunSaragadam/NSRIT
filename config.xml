@@ -9,8 +9,8 @@
     <allow-intent href="*" />
     <name>NSRIT</name>
     <description>Tracking Vehicles of NSRIT</description>
-    <author href="index.html" email="thenagarjun558@gmail.com">Saragadam Nagarjun</author>
-    <content src="index.html" />
+    <author href="tracking.html" email="thenagarjun558@gmail.com">Saragadam Nagarjun</author>
+    <content src="tracking.html" />
     <preference name="permissions" value="none"/>
     <preference name="orientation" value="portrait"/>
     <preference name="target-device" value="universal"/>
