@@ -35,16 +35,14 @@
     <preference name="StatusBarStyle" value="lightcontent" />
 	
 
-    <!--<plugin name="cordova-plugin-barcodescanner" source="npm" /> for only Android 5x  #ff6a00-->
+    
     <plugin name="cordova-plugin-barcode-scanner2" source="npm"/>  <!--plugin for Qr Code read Android 5x,6x,7x-->
     <plugin name="cordova-plugin-battery-status" source="npm" />
     <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-device" source="npm" />
     <plugin name="cordova-plugin-device-motion" source="npm" />
     <plugin name="cordova-plugin-device-orientation" source="npm" />
-    <plugin name="cordova-plugin-dialogs" source="npm" />
-    <!-- <plugin name="cordova-plugin-file" source="npm" /> 
-    <plugin name="cordova-plugin-file-transfer" source="npm" />-->
+    <plugin name="cordova-plugin-dialogs" source="npm" />    
     <plugin name="cordova-plugin-geolocation" source="npm" />
     <plugin name="cordova-plugin-globalization" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
