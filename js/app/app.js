@@ -23,15 +23,11 @@
 
         calcRoute(pos.lat, pos.lng);
 		  
-		var deviceInfo = cordova.require("cordova/plugin/DeviceInformation");
-deviceInfo.get(function(result) {
-        alert("result = " + result);
-    }, function() {
-        alert("error");
-    });
+ 
       
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');
+		alert(cordova.plugins.uid.IMEI);
         map.setCenter(pos);
       },
       function() {
