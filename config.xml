@@ -7,6 +7,7 @@
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
+	<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-deviceinformation" version="2.0.2">
     <name>NSRIT</name>
     <description>Tracking Vehicles of NSRIT</description>
     <author href="index.html" email="thenagarjun558@gmail.com">Saragadam Nagarjun</author>
@@ -36,7 +37,7 @@
 	
 
     
-    
+    <plugin name="cordova-plugin-barcode-scanner2" source="npm"/>  <!--plugin for Qr Code read Android 5x,6x,7x-->
     <plugin name="cordova-plugin-battery-status" source="npm" />
     <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-device" source="npm" />
