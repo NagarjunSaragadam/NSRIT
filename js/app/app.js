@@ -21,13 +21,11 @@
         lng: position.coords.longitude
       };
 
-        calcRoute(pos.lat, pos.lng);
-		  
+        calcRoute(pos.lat, pos.lng);  
  
       
         infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
-		alert(cordova.plugins.uid.IMEI);
+        infoWindow.setContent('Location found.');		
         map.setCenter(pos);
       },
       function() {
