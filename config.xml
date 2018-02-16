@@ -7,7 +7,6 @@
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
-	<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-deviceinformation" version="2.0.2">
     <name>NSRIT</name>
     <description>Tracking Vehicles of NSRIT</description>
     <author href="index.html" email="thenagarjun558@gmail.com">Saragadam Nagarjun</author>
@@ -35,8 +34,8 @@
     <preference name="StatusBarBackgroundColor" value="#778899" />
     <preference name="StatusBarStyle" value="lightcontent" />
 	
-
-    
+	
+	
     <plugin name="cordova-plugin-barcode-scanner2" source="npm"/>  <!--plugin for Qr Code read Android 5x,6x,7x-->
     <plugin name="cordova-plugin-battery-status" source="npm" />
     <plugin name="cordova-plugin-camera" source="npm" />
@@ -62,13 +61,19 @@
     <plugin name="cordova-plugin-chrome-apps-alarms" spec="^1.3.3" />
     <plugin name="cordova-plugin-chrome-apps-notifications" spec="^1.2.0" />
 	
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-deviceinformation"
+        version="2.0.2">
 
-	<js-module src="js/app/uid.js" name="uid">
-		<clobbers target="cordova.plugins.uid" />
-	</js-module>
 
-
+   <js-module src="www/deviceinformation.js" name="DeviceInformation">
+        <clobbers target="cordova.plugins.deviceInformation" />
+    </js-module>
 	
+	  <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
 	
 	
     <access origin="*"/>
@@ -80,17 +85,18 @@
     <allow-intent href="geo:*"/>
     <platform name="android">
         <allow-intent href="market:*"/>
-		<config-file target="res/xml/config.xml" parent="/*">
-			<feature name="UID">
-				<param name="android-package" value="org.hygieiasoft.cordova.uid.UID" />
-			</feature>
-		</config-file>
-		<config-file target="AndroidManifest.xml" parent="/*">
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-		</config-file>
+	  <source-file src="src/com/upchannel/cordova/plugins/DeviceInformation.java" target-dir="src/com/upchannel/cordova/plugins" />
 
-		<source-file src="src/android/UID.java" target-dir="src/org/hygieiasoft/cordova/uid" />
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="DeviceInformation">
+                <param name="android-package" value="com.upchannel.cordova.plugins.DeviceInformation" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+        </config-file>
     </platform>
     <platform name="ios">
         <allow-intent href="ct:*"/>
