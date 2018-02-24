@@ -13,10 +13,10 @@ function getPosition() {
          'Heading: '           + position.coords.heading           + '\n' +
          'Speed: '             + position.coords.speed             + '\n' +
          'Timestamp: '         + position.timestamp                + '\n');
-	   
-	   var Rootref= firebase.database().ref().child('Nagarjun');
+	   var deviceid=device.uuid;
+	   var Rootref= firebase.database().ref().child(deviceid);
 	   Rootref.set({		   
-		   device.uuid:position.coords.latitude+position.coords.longitude
+		   Cordinates:position.coords.latitude+','+position.coords.longitude
 	   });
 	   
 	   
