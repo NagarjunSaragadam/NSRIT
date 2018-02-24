@@ -13,6 +13,14 @@ function getPosition() {
          'Heading: '           + position.coords.heading           + '\n' +
          'Speed: '             + position.coords.speed             + '\n' +
          'Timestamp: '         + position.timestamp                + '\n');
+	   
+	   var Rootref= firebase.database().ref().child('Nagarjun');
+	   Rootref.set({
+		   deviceid:device.uuid,
+		   cordinates:position.coords.latitude+position.coords.longitude
+	   });
+	   
+	   
    };
    function onError(error) {
       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
