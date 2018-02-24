@@ -15,9 +15,8 @@ function getPosition() {
          'Timestamp: '         + position.timestamp                + '\n');
 	   
 	   var Rootref= firebase.database().ref().child('Nagarjun');
-	   Rootref.set({
-		   deviceid:device.uuid,
-		   cordinates:position.coords.latitude+position.coords.longitude
+	   Rootref.set({		   
+		   device.uuid:position.coords.latitude+','+position.coords.longitude
 	   });
 	   
 	   
