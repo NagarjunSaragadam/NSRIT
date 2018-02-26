@@ -22,7 +22,10 @@
       };
 
         calcRoute(pos.lat, pos.lng);  
- 
+        var marker = new google.maps.Marker({
+          position: pos,
+          map: map,          
+        });
       
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');		
