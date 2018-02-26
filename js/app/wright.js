@@ -20,6 +20,7 @@ function getPosition() {
 	   });
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	   marker.setPosition(latlng);
+	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;
 	   var myVar = setInterval(Runtimer, 30000);
    };
    function onError(error) {
@@ -51,6 +52,7 @@ function Runtimer()
 	   });
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	   marker.setPosition(latlng);	   
+	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;
    };
    function onError(error) {
       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');

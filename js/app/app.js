@@ -5,15 +5,14 @@
   var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
   var directionsService = new google.maps.DirectionsService();
   var map;
-  var destino = new google.maps.LatLng(18.0008621,-92.9459908);
-
+  var destino = new google.maps.LatLng(17.8719362,83.2946227);
   function initialize() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 17.989456, lng: -92.9475061},
+        center: {lat: 17.8719362, lng: 83.2946227},
         zoom: 15
       });
 
-    var infoWindow = new google.maps.InfoWindow({map: map});
+    //var infoWindow = new google.maps.InfoWindow({map: map});
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -21,14 +20,14 @@
         lng: position.coords.longitude
       };
 
-        calcRoute(pos.lat, pos.lng);  
+        //calcRoute(pos.lat, pos.lng);  
         var marker = new google.maps.Marker({
           position: pos,
           map: map,          
         });
-      
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');		
+      document.getElementById("locationid").innerHTML=pos.lat+','+pos.lng; 
+        //infoWindow.setPosition(pos);
+        //infoWindow.setContent('Location found.');		
         map.setCenter(pos);
       },
       function() {

@@ -13,6 +13,16 @@
             margin: 0px; 
             padding: 0px
           }
+   buttonthis {
+    background-color: #008CBA; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
         </style>
 	  
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSjgW8wwbdxs_Rp3JypXOdTbRCSUaRwpc" type="text/javascript"></script>
@@ -31,9 +41,24 @@
 </script>
 
     </head>
-    <body>
-	<button id = "getPosition">CURRENT POSITION</button>
+    <body>	
       <div id="map"></div>
+		<br/>
+		<table Style="width:100%">
+			<tr>
+				<td Style="width:100%">
+						  <button id = "getPosition" style="width:100%;background-color: #008CBA;border: none;color: white;padding: 15px 32px;
+    text-align: center;text-decoration: none;display: inline-block;font-size: 16px; ">CURRENT POSITION</button>
+				</td>				
+			</tr>
+			<tr>
+				<td Style="width:100%">
+					<span style = "color:#8866ff;width:100%;text-align: center;" ID="locationid">Capture Location</span>
+				</td>
+			</tr>
+		</table>
+		
+
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="cordova.js"></script>
       <script type="text/javascript" src="js/app/app.js"></script>
