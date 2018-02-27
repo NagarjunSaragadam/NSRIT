@@ -10,9 +10,9 @@
 
   var onDeviceReady = function() {
     device_ready = true;
-    document.getElementById("getPosition").addEventListener("click", getPosition);
-    document.getElementById("watchPosition").addEventListener("click", watchPosition);	
-	alert(device.uuid);
+    //document.getElementById("getPosition").addEventListener("click", getPosition);
+    //document.getElementById("watchPosition").addEventListener("click", watchPosition);	
+	//alert(device.uuid);
     initApp();
   };
 
