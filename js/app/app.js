@@ -5,6 +5,7 @@
   var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
   var directionsService = new google.maps.DirectionsService();
   var map;
+  var marker;
   var destino = new google.maps.LatLng(17.8719362,83.2946227);
   function initialize() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -21,7 +22,7 @@
       };
 
         //calcRoute(pos.lat, pos.lng);  
-        var marker = new google.maps.Marker({
+          marker = new google.maps.Marker({
           position: pos,
           map: map,          
         });

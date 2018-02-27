@@ -1,4 +1,4 @@
-function getPosition() {	
+function getPosition() {		
    var options = {
       enableHighAccuracy: true,
       maximumAge: 3600000
@@ -29,8 +29,8 @@ function getPosition() {
 }
 
 
-function Runtimer()
-{
+function Runtimer() {
+	debugger;
 	 var options = {
       enableHighAccuracy: true,
       maximumAge: 3600000
