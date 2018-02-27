@@ -21,7 +21,7 @@ function getPosition() {
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	   marker.setPosition(latlng);
 	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;
-	   var myVar = setInterval(Runtimer, 30000);
+	   setInterval(Runtimer, 5000);
    };
    function onError(error) {
       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
@@ -30,7 +30,7 @@ function getPosition() {
 
 
 function Runtimer() {
-	debugger;
+	alert("Testing...");
 	 var options = {
       enableHighAccuracy: true,
       maximumAge: 3600000
