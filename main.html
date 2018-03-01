@@ -65,9 +65,9 @@ function runme(){
 						document.getElementById("person").innerHTML=" Visitor.. Contact Administrator to add your details";
 					}
                 }
-					catch(error)
+					catch(err)
 						{
-							alert("Deviceid not updated");
+							alert(err.message);
 						}
 				}
             });
