@@ -33,7 +33,8 @@ function runme(){
                    var arrayObject = [];
                    arrayObject = snapshot.val();                                      
 				   var childarray = [];
-				   var deviceid=device.uuid;					
+				   try{
+					var deviceid=device.uuid;									   
 				   var validcount=0;
 				   var person='';	
                     snapshot.forEach(function(data) {                              
@@ -64,6 +65,11 @@ function runme(){
 						document.getElementById("person").innerHTML=" Visitor.. Contact Administrator to add your details";
 					}
                 }
+					catch(error)
+						{
+							alert("Deviceid not updated");
+						}
+				}
             });
 	
 	}
