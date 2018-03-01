@@ -22,12 +22,14 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAvCB0fJALK-4VaEiubgiVYuh-pJxNGvH0&callback=initMap&libraries=geometry" async defer></script>
     <script type="text/javascript">
         var config = {
-          apiKey: "AIzaSyBQ79jCTxiGDwXjk-NyBHQJERpAgIw2SAo",
-          authDomain: "kyte-8d276.firebaseapp.com",
-          databaseURL: "https://kyte-8d276.firebaseio.com/"
-        };
-
-        firebase.initializeApp(config);
+    apiKey: "AIzaSyAdS2yvwNHh9sZ2ou5RQO8MMPoBHOxQ2r8",
+    authDomain: "my-project-1492148271846.firebaseapp.com",
+    databaseURL: "https://my-project-1492148271846.firebaseio.com",
+    projectId: "my-project-1492148271846",
+    storageBucket: "my-project-1492148271846.appspot.com",
+    messagingSenderId: "764713792706"
+     };
+          firebase.initializeApp(config);
 
         var rootRef = firebase.database().ref();
         var coords = [], colors = ["#ff0000"];
@@ -51,15 +53,13 @@
         }
 
         if (parms.length > 0) {
-            var UUID = qsParm["idval"];
-			alert(UUID);
+            var UUID = qsParm["idval"];			
 		}
             var mapProp = {
                 center: new google.maps.LatLng(14.2599286, 80.1137635),
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                panControl: false,
-                zoomControl: false,
+                panControl: false,                
                 scaleControl: false,
                 mapTypeControl: false,
                 streetViewControl: false,
@@ -85,6 +85,7 @@
                 if(snapshot.exists()){
                     var colorNo = 0;
                     var arrayObject = [];
+					var childarray = [];
                     arrayObject = snapshot.val();
                     removeMarkers();
                    
@@ -93,6 +94,8 @@
                         var i = Object.values(data.val()).length, k = 0;
                         coords = [];
                         if(i > 0){
+							childarray=Object.values(data.val()).toString().split(',');
+							alert(childarray[0])
                             var color = colors[colorNo];
                             /*if(colorNo == 6){
                                 colorNo = 0;
@@ -101,118 +104,24 @@
                                 colorNo = parseInt(colorNo) + 1;
                             }*/
 
-                            startPoint = new google.maps.LatLng(data.val().startPoint.latlng.split(',')[0], 
-                                                                data.val().startPoint.latlng.split(',')[1]);
-                            prevPoint = new google.maps.LatLng(data.val().prevPoint.latlng.split(',')[0], 
-                                                               data.val().prevPoint.latlng.split(',')[1]);
-                            endPoint = new google.maps.LatLng(data.val().endPoint.latlng.split(',')[0], 
-                                                              data.val().endPoint.latlng.split(',')[1]);
+                            startPoint = new google.maps.LatLng(childarray[1],childarray[2]);                          
                                                         
                             startMarker = new google.maps.Marker();
                             startMarker.setPosition(startPoint);
                             
-                            gstartmarkers.push(prevPoint);
                             
-                            if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {
-                                var heading = google.maps.geometry.spherical.computeHeading(prevPoint, endPoint);
-                                var markerImage = {
-                                    path: car,
-                                    //url: 'img/ic_sedan_topview.png',
-                                    scaledSize: new google.maps.Size(30, 60), // size
-                                    origin: new google.maps.Point(0, 0), // origin
-                                    anchor: new google.maps.Point(10, 25), // anchor
-                                    rotation: heading,
-                                    fillColor: color,
-                                    fillOpacity: 1,
-                                    scale: .4,
-                                    //strokeColor: "#606060",
-                                    strokeOpacity: .7
-                                };
+                            
+                            if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                                            
                                 var endMarker = new google.maps.Marker({
                                     draggable: false,
                                     map: map
                                 });
                                 //debugger;
-                                endMarker.setPosition(endPoint);
-                                endMarker.setIcon(markerImage);
-
-                                if(map.getZoom() <= 17 && markerImage.scale != 0.4) {
-                                    markerImage.scale = .4;
-                                    endMarker.setOptions({icon:markerImage});
-                                } else if(map.getZoom() == 18 && markerImage.scale != 0.8) {
-                                    markerImage.scale = .8;
-                                    endMarker.setOptions({icon:markerImage});
-                                } else if(map.getZoom() > 18 && markerImage.scale != 1) {
-                                    markerImage.scale = 1;
-                                    endMarker.setOptions({icon:markerImage});
-                                }
-
+                                endMarker.setPosition(endPoint);                                
                                 gendmarkers.push(endMarker);
-                                
-                                var tripPlan = new google.maps.Polyline({
-                                    strokeColor: color,
-                                    //strokeOpacity: 0.6,
-                                    strokeWeight: 2
-                                });
-                                
-                                google.maps.event.addListener(endMarker, 'click', function() {
-                                    infowindow.close(); coords = [];
-                                    var markCoords = [], tripCoords = [], distance = 0;
-                                    //debugger;                                    
-                                    $.ajax({
-                                        type: "GET",
-                                        contentType: "application/json; charset=utf-8",
-                                        url: 'http://61.0.225.169/AviationApi/api/TripDetails/ReadLocationLog/' + data.key,
-                                        dataType: "json",
-                                        data: '{}',
-                                        async: true,
-                                        success: function (deptresult) {
-                                            //debugger;
-                                            $.each(deptresult.Coordinates, function (key, data) {
-                                                tripCoords.push(new google.maps.LatLng(data.split(',')[0], data.split(',')[1]));
-                                                if(tripCoords.length > 1){
-                                                    if(tripCoords[tripCoords.length - 2] != tripCoords[tripCoords.length - 1]){
-                                                        var mts = google.maps.geometry.spherical.computeDistanceBetween
-                                                        (tripCoords[tripCoords.length - 2], tripCoords[tripCoords.length - 1]);
-                                                        distance = parseFloat(distance) + parseFloat(mts);
-                                                    }                                                    
-                                                }                                                    
-                                            });
-                                            
-                                            OpenInfo(deptresult.VehNo, deptresult.Coordinates[0], deptresult.Coordinates[deptresult.Coordinates.length - 1], distance);
-                                            
-                                            tripPlan.setPath(tripCoords);
-                                            tripPlan.setMap(map);
-                                        },
-                                        error: function (result) {
-                                            alert(result);
-                                        }
-                                    });
-                                });
                             }
-                            
-                            map.addListener('click', function(){
-                                infowindow.close();
-                                tripPlan.setMap(null);
-                            });
-
-                            google.maps.event.addListener(map, 'zoom_changed', function() {
-                                var zoom = map.getZoom();
-                                var picon = endMarker.getIcon();
-
-                                if(zoom <= 17 && picon.scale != 0.4) {
-                                    picon.scale=0.4;
-                                    endMarker.setOptions({icon:picon});
-                                } else if(zoom == 18 && picon.scale != 0.8) {
-                                    picon.scale=0.8;
-                                    endMarker.setOptions({icon:picon});
-                                } else if(zoom > 18 && picon.scale != .75) {
-                                    picon.scale = .75;
-                                    endMarker.setOptions({icon:picon});
-                                }
-                            });
                         }
-
+               endPoint=startPoint;
                      });
                 }
             });
