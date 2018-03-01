@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Welcome Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+<script type="application/x-javascript"> addEventListener("load", function() { runme(); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -23,7 +23,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         messagingSenderId: "69398739277"
        };
 	var rootRef;
-$(document).ready(function(){
+function runme(){
 	debugger;	 
         firebase.initializeApp(config);
         rootRef = firebase.database().ref();		
@@ -66,10 +66,11 @@ $(document).ready(function(){
                 }
             });
 	
-	});
+	}
 	function clickgo()
 	{
-		alert(device.uuid);
+		//runme();
+		//alert(device.uuid);
 	}
 </script>
 </head>
@@ -77,10 +78,7 @@ $(document).ready(function(){
 	<!-- main -->
 		<div class="main">
 			<h1 style="font-size:60px">Welcome <span id="person"></span> </h1>
-			<form>
-				<a id="ent" onclick="clickgo();" Style="width: 100%;
-    background-color: #f54890;padding: 21px;padding-left: 50px;padding-right: 50px;
-    color: #f3eded;">Start</a>
+			<form>				
 				<a href="index.html" id="driver" Style="display:none;width: 100%;
     background-color: #f54890;padding: 21px;padding-left: 50px;padding-right: 50px;
     color: #f3eded;">Start Track</a>				
