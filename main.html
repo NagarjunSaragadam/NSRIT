@@ -58,12 +58,13 @@ function runme(){
 								{
 									document.getElementById("person").innerHTML=person;
 									document.getElementById("student").style.display = 'block';
+									document.getElementById("hiddenspan").innerHTML=childarray[2];
 								}
 														
 						}
 					else
 					{
-						document.getElementById("person").innerHTML=" Visitor.. Contact Administrator to add your details";
+						document.getElementById("person").innerHTML=" Visitor.."+""+" Contact Administrator to add your details";
 					}
                 }
 					catch(err)
@@ -76,8 +77,8 @@ function runme(){
 	}
 	function clickgo()
 	{
-		//runme();
-		//alert(device.uuid);
+		var qs=document.getElementById("hiddenspan").innerHTML;
+		window.location.href="tracking.html?idval="+qs;
 	}
 </script>
 </head>
@@ -88,8 +89,9 @@ function runme(){
 			<form>				
 				<a href="index.html" id="driver" Style="display:none;width: 100%;
     background-color: #f54890;color: #f3eded;">Start Track</a>				
-				<a href="tracking.html" id="student" Style="display:none;width: 100%;
-    background-color: #f54890;color: #f3eded;">Get My Track</a>				
+				<a  id="student" onclick="clickgo();" Style="display:none;width: 100%;
+    background-color: #f54890;color: #f3eded;">Get My Track</a>	
+				<span id="hiddenspan" style="display:block"></span>
 			</form>
 		</div>
 		<div class="footer">
