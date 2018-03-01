@@ -14,19 +14,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	debugger;
-	  var config = {
-    apiKey: "AIzaSyBeBob8a8BTjNgJ9y5B_tPav8H0WiB_m0o",
+	 var  config = {
+        apiKey: "AIzaSyBeBob8a8BTjNgJ9y5B_tPav8H0WiB_m0o",
         authDomain: "usermodule-465de.firebaseapp.com",
         databaseURL: "https://usermodule-465de.firebaseio.com",
         projectId: "usermodule-465de",
         storageBucket: "usermodule-465de.appspot.com",
         messagingSenderId: "69398739277"
-  };
+       };
+	var rootRef;
+$(document).ready(function(){
+	debugger;	 
         firebase.initializeApp(config);
-        var rootRef = firebase.database().ref();
-	
+        rootRef = firebase.database().ref();		
              rootRef.on('value', function(snapshot){
                 if(snapshot.exists()){
                    var colorNo = 0;
@@ -67,6 +67,10 @@ $(document).ready(function(){
             });
 	
 	});
+	function clickgo()
+	{
+		alert(device.uuid);
+	}
 </script>
 </head>
 <body>
@@ -74,6 +78,9 @@ $(document).ready(function(){
 		<div class="main">
 			<h1 style="font-size:60px">Welcome <span id="person"></span> </h1>
 			<form>
+				<a id="ent" onclick="clickgo();" Style="width: 100%;
+    background-color: #f54890;padding: 21px;padding-left: 50px;padding-right: 50px;
+    color: #f3eded;">Start</a>
 				<a href="index.html" id="driver" Style="display:none;width: 100%;
     background-color: #f54890;padding: 21px;padding-left: 50px;padding-right: 50px;
     color: #f3eded;">Start Track</a>				
