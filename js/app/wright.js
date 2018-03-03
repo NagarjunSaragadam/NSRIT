@@ -92,22 +92,11 @@ function watchuserPosition() {
       timeout: 10000,
       enableHighAccuracy: true,
    }  
-var circle = {
-    path: google.maps.SymbolPath.CIRCLE,
-    fillColor: 'green',
-    fillOpacity: .4,
-    scale: 4.5,
-    strokeColor: 'green',
-    strokeWeight: 5
-};
+   
    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
    function onSuccess(position) {	   
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	   	   
-	   usermarker = new google.maps.Marker({      
-		   position:latlng,
-		   icon: circle,                     
-            });
-	   usermarker.setMap(map);	   
+	   usermarker.setPosition(latlng);	   
 	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;	   
    };
    function onError(error) {
