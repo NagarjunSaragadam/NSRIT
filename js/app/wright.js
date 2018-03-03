@@ -4,15 +4,7 @@ function getPosition() {
       maximumAge: 3600000
    }
    var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-   function onSuccess(position) {
-      //alert('Latitude: '          + position.coords.latitude          + '\n' +
-        // 'Longitude: '         + position.coords.longitude         + '\n' +
-         //'Altitude: '          + position.coords.altitude          + '\n' +
-         //'Accuracy: '          + position.coords.accuracy          + '\n' +
-         //'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-         //'Heading: '           + position.coords.heading           + '\n' +
-         //'Speed: '             + position.coords.speed             + '\n' +
-         //'Timestamp: '         + position.timestamp                + '\n');
+   function onSuccess(position) {      
 	   var deviceid=device.uuid;
 	   var Rootref= firebase.database().ref().child(deviceid);
 	   Rootref.set({		   
@@ -20,11 +12,12 @@ function getPosition() {
 	   });
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	   marker.setPosition(latlng);
-	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;
-	   setInterval(Runtimer, 5000);
+	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;	   
+	   return document.getElementById("locationid").innerHTML;
    };
    function onError(error) {
       alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+	   return error.message;
    }
 }
 
@@ -90,3 +83,39 @@ function watchPosition() {
       alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
    }
 }
+
+
+
+function watchuserPosition() {
+   var options = {
+      maximumAge: 3600000,
+      timeout: 10000,
+      enableHighAccuracy: true,
+   }  
+var circle = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: 'green',
+    fillOpacity: .4,
+    scale: 4.5,
+    strokeColor: 'green',
+    strokeWeight: 5
+};
+   var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+   function onSuccess(position) {	   
+	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	   	   
+	   usermarker = new google.maps.Marker({      
+		   position:latlng,
+		   icon: circle,                     
+            });
+	   usermarker.setMap(map);	   
+	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;	   
+   };
+   function onError(error) {
+      alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+   }
+}
+
+
+
+
+
