@@ -131,17 +131,8 @@
                                     map: map
                                 });						
                                 
-								if(childarray[0]==$("#hiditemcode").val())
-									{
-									  	endMarker.setVisible(true);		
-										var latLng = endMarker.getPosition(); // returns LatLng object
-                              map.setCenter(latLng); // setCenter takes a LatLng object  
-									}
-								else
-									{
-										endMarker.setVisible(false);											
-									}
-								        endMarker.setPosition(endPoint);
+								
+                                        endMarker.setPosition(endPoint);
                                         gendmarkers.push(endMarker);
 										
                                 
