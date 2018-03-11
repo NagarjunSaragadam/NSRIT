@@ -122,6 +122,7 @@
                             startMarker.setPosition(startPoint);
 							 map.setCenter(startMarker.position);
 var distance = google.maps.geometry.spherical.computeDistanceBetween(startPoint, usermarker.position);   
+							alert(distance);
 								if(distance<10)
 								{
 									alert("YOUR BUS IS NEAR< 60 METRS");
