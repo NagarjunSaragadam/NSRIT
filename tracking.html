@@ -130,7 +130,13 @@
 									icon: circle, 
                                     map: map
                                 });						
-                                
+                       
+map.setCenter(startMarker.position);
+
+var distance = google.maps.geometry.spherical.computeDistanceBetween(startPoint, usermarker.position);   
+								if(distance<50)
+								{alert("YOUR BUS IS NEAR< 60 METRS")
+								}
 								
                                         endMarker.setPosition(endPoint);
                                         gendmarkers.push(endMarker);
