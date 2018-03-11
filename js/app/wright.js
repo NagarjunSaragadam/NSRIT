@@ -96,7 +96,7 @@ function watchuserPosition() {
    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
    function onSuccess(position) {	   
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);	   	   
-	   usermarker.setPosition(latlng);	   
+	   
 	   document.getElementById("locationid").innerHTML=position.coords.latitude+','+position.coords.longitude;	   
    };
    function onError(error) {

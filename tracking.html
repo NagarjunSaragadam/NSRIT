@@ -47,7 +47,7 @@
 		var usermarker;       
         function initMap() {
 			
-										var circle = {
+         var circle = {
     path: google.maps.SymbolPath.CIRCLE,
     fillColor: 'red',
     fillOpacity: .1,
@@ -76,15 +76,16 @@
             }
         }       
         if(parms.length > 0) {
-            var UUID = qsParm["idval"];			
+            var UUID = qsParm["idval"];
+			$("#locationid").val(qsParm["lat"]+','+qsParm["long"])
 			$("#hiditemcode").val(qsParm["idval"]);			
 		  }
 			
-			watchuserPosition();
+			
             
 			
             var mapProp = {
-                center: new google.maps.LatLng(14.2599286, 80.1137635),
+                center: new google.maps.LatLng(qsParm["lat"], qsParm["long"]),
                 zoom: 15,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 panControl: false,                
@@ -95,9 +96,9 @@
                 rotateControl: false
             };
 
-            map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-								   
-   usermarker = new google.maps.Marker({   	       
+   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);								   
+   usermarker = new google.maps.Marker({  
+	      position: new google.maps.LatLng(qsParm["lat"], qsParm["long"]),
 		   icon: circleuser,                     
      });
 	   usermarker.setMap(map);
@@ -119,32 +120,33 @@
 							childarray=Object.values(data.val()).toString().split(',');							
                             var color = colors[colorNo];
                             startPoint = new google.maps.LatLng(childarray[1],childarray[2]);                          
-                                                        
+                                       
                             startMarker = new google.maps.Marker();
                             startMarker.setPosition(startPoint);
-                            if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                    
+							var latLng = startMarker.getPosition(); // returns LatLng object
+                              map.setCenter(latLng); // setCenter takes a LatLng object   
+							if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                    
                                 var endMarker = new google.maps.Marker({
                                     draggable: false,
 									icon: circle, 
                                     map: map
-                                });
+                                });						
+                                //debugger;
+								//alert(childarray[0]+' '+$("#hiditemcode").val())
 								if(childarray[0]!=$("#hiditemcode").val())
 									{
 									  	endMarker.setVisible(false);
 									}
 								else
 									{
-										endMarker.setVisible(true);
-										//watchuserPosition();
-										//routedistance=google.maps.geometry.spherical.computeDistanceBetween (startPoint, new google.maps.LatLng(usermarker.latitude,usermarker.longitude));
-										//if(routedistance<100)
-										//alert(startPoint+','+new google.maps.LatLng(usermarker.latitude,usermarker.longitude));
-                                       // alert("Shout"+routedistance);
-									}
-                                //debugger;
-                                endMarker.setPosition(endPoint);
+										endMarker.setVisible(true);	
+										endMarker.setPosition(endPoint);
                                 gendmarkers.push(endMarker);
-                            }
+										
+									}
+                                
+                            }	
+                             
                         }
                endPoint=startPoint;
                      });
