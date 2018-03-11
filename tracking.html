@@ -123,8 +123,7 @@
                                        
                             startMarker = new google.maps.Marker();
                             startMarker.setPosition(startPoint);
-							var latLng = startMarker.getPosition(); // returns LatLng object
-                              map.setCenter(latLng); // setCenter takes a LatLng object   
+							 
 							if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                    
                                 var endMarker = new google.maps.Marker({
                                     draggable: false,
@@ -134,7 +133,9 @@
                                 
 								if(childarray[0]==$("#hiditemcode").val())
 									{
-									  	endMarker.setVisible(true);										
+									  	endMarker.setVisible(true);		
+										var latLng = endMarker.getPosition(); // returns LatLng object
+                              map.setCenter(latLng); // setCenter takes a LatLng object  
 									}
 								else
 									{
