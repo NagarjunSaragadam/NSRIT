@@ -121,8 +121,11 @@
                             startMarker = new google.maps.Marker();
                             startMarker.setPosition(startPoint);
 							 map.setCenter(startMarker.position);
-var distance = google.maps.geometry.spherical.computeDistanceBetween(startPoint, usermarker.position);   
-							alert(distance);
+var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(childarray[1],childarray[2]), 
+																	new google.maps.LatLng(usermarker.getPosition().lat(),
+																						   usermarker.getPosition().lng()));  
+							
+							
 								if(distance<10)
 								{
 									alert("YOUR BUS IS NEAR< 60 METRS");
