@@ -127,9 +127,9 @@ var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.
 																						   usermarker.getPosition().lng()));  
 							
 							
-								if(distance<50&&countko<=2)
+								if(distance<2000 && countko<=2)
 								{
-									alert("YOUR BUS IS NEAR< 60 METRS");
+									alert("YOUR BUS IS NEAR < 60 METRS");
 									countko=countko+1;
 								}
 							if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                    
@@ -137,10 +137,7 @@ var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.
                                     draggable: false,
 									icon: circle, 
                                     map: map
-                                });						
-                       
-
-								
+                                });	
                                         endMarker.setPosition(endPoint);
                                         gendmarkers.push(endMarker);
 										
