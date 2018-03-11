@@ -34,6 +34,7 @@
     storageBucket: "my-project-1492148271846.appspot.com",
     messagingSenderId: "764713792706"
      };
+		var countko=0;
         firebase.initializeApp(config);
         var rootRef = firebase.database().ref();
         var coords = [], colors = ["#ff0000"];
@@ -126,9 +127,10 @@ var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.
 																						   usermarker.getPosition().lng()));  
 							
 							
-								if(distance<50)
+								if(distance<50&&countko<=2)
 								{
 									alert("YOUR BUS IS NEAR< 60 METRS");
+									countko=countko+1;
 								}
 							if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                    
                                 var endMarker = new google.maps.Marker({
