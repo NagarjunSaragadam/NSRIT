@@ -131,19 +131,18 @@
 									icon: circle, 
                                     map: map
                                 });						
-                                //debugger;
-								//alert(childarray[0]+' '+$("#hiditemcode").val())
-								if(childarray[0]!=$("#hiditemcode").val())
+                                
+								if(childarray[0]==$("#hiditemcode").val())
 									{
-									  	endMarker.setVisible(false);
+									  	endMarker.setVisible(true);										
 									}
 								else
 									{
-										endMarker.setVisible(true);	
-										endMarker.setPosition(endPoint);
-                                gendmarkers.push(endMarker);
-										
+										endMarker.setVisible(false);											
 									}
+								        endMarker.setPosition(endPoint);
+                                        gendmarkers.push(endMarker);
+										
                                 
                             }	
                              
