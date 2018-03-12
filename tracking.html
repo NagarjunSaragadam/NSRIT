@@ -14,8 +14,10 @@
     </head>
 <body>
     <div id="main" style="text">
-        <span class="text-center" style="color:white; font-size: 25px; padding-left: 5px;">TrackMylocation:
-			<span style = "color:#2e2d2f;;width:100%;text-align: center;font-size: 12px;" ID="locationid">Capture Location</span>
+        <span class="text-center" style="color:white; font-size: 25px; padding-left: 5px;">Bus Tracking
+			<span style = "color:#2e2d2f;;width:100%;text-align: center;font-size: 12px;" ID="locationid"></span>
+			<button onclick="mybus();" Style="float:right;margin-left:10px">My Bus</button>			
+			<button onclick="nextbus()" Style="float:right">Next Bus</button>
 		</span>
         <div id="googleMap" style="width:100%; height:90%; position: absolute; top: 50px; left: 0px; overflow: hidden;"></div>
     </div>
@@ -35,6 +37,7 @@
     messagingSenderId: "764713792706"
      };
 		var countko=0;
+		var dislook=0;
         firebase.initializeApp(config);
         var rootRef = firebase.database().ref();
         var coords = [], colors = ["#ff0000"];
@@ -54,6 +57,16 @@
     strokeColor: 'red',
     strokeWeight: 5
 };
+			
+						var circletwo = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: 'blue',
+    fillOpacity: .4,
+    scale: 4.5,
+    strokeColor: 'blue',
+    strokeWeight: 5
+};
+			
 			var circleuser = {
     path: google.maps.SymbolPath.CIRCLE,
     fillColor: 'green',
@@ -94,12 +107,29 @@
                 overviewMapControl: false,
                 rotateControl: false
             };
-   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);								   
+   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
    usermarker = new google.maps.Marker({  
 	      position: new google.maps.LatLng(qsParm["lat"], qsParm["long"]),
 		   icon: circleuser,                     
      });
-	   usermarker.setMap(map);
+   usermarker.setMap(map);
+			
+   drivermarker = new google.maps.Marker({  
+	      title:'Driver',
+	      position: new google.maps.LatLng(qsParm["lat"], qsParm["long"]),
+		   icon: circle,                     
+     });
+   drivermarker.setMap(map);
+
+  alternatemarker = new google.maps.Marker({  
+	      title:'Next alternate',
+	      position: new google.maps.LatLng(qsParm["lat"], qsParm["long"]),
+		   icon: circletwo,                     
+     });
+   alternatemarker.setMap(map);
+			
+	
+			
             infowindow = new google.maps.InfoWindow();   
             
             rootRef.on('value', function(snapshot){
@@ -116,37 +146,38 @@
                         coords = [];
                         if(i > 0){
 							childarray=Object.values(data.val()).toString().split(',');							
-                            var color = colors[colorNo];
-                            startPoint = new google.maps.LatLng(childarray[1],childarray[2]);                          
-                                       
-                            startMarker = new google.maps.Marker();
-                            startMarker.setPosition(startPoint);
-							 map.setCenter(startMarker.position);
-var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(childarray[1],childarray[2]), 
+							 var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(childarray[1],childarray[2]), 
 																	new google.maps.LatLng(usermarker.getPosition().lat(),
-																						   usermarker.getPosition().lng()));  
-							
-							
+																						   usermarker.getPosition().lng())); 
+							 if(childarray[0]==$("#hiditemcode").val())
+							 {
+								startPoint = new google.maps.LatLng(childarray[1],childarray[2]); 								 
+								drivermarker.setPosition(startPoint);							
+								 map.setCenter(startPoint);
 								if(distance<2000 && countko<=2)
 								{
 									alert("YOUR BUS IS NEAR < 60 METRS");
 									countko=countko+1;
 								}
-							if((endPoint != null || endPoint != undefined) && (startPoint != endPoint)) {                                    
-                                var endMarker = new google.maps.Marker({
-                                    draggable: false,
-									icon: circle, 
-                                    map: map
-                                });	
-                                        endMarker.setPosition(endPoint);
-                                        gendmarkers.push(endMarker);
-										
-                                
-                            }	
-                             
-                        }
-               endPoint=startPoint;
+							 }
+							else
+							 {
+							    if(dislook==0)
+									{
+										dislook=distance;
+										prevPoint=new google.maps.LatLng(childarray[1],childarray[2]); 
+									}
+								  else if(distance<dislook)
+									{
+										dislook=distance;
+										prevPoint=new google.maps.LatLng(childarray[1],childarray[2]); 
+									}
+							 }
+							
+							
+						}
                      });
+					alternatemarker.setPosition(prevPoint);
                 }
             });
         }
@@ -167,6 +198,15 @@ var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.
                 }
             }*/
         }
+		
+			function mybus()
+			{
+			      map.panTo(drivermarker.getPosition());
+			}	
+		function nextbus()
+			{
+			      map.panTo(alternatemarker.getPosition());
+			}
         function OpenInfo(key, start, end, distance) {
             var msg = "<u><b>Vehicle No:</b> " + key + "</u><br><br>";
             //debugger;
