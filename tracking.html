@@ -154,9 +154,9 @@
 								startPoint = new google.maps.LatLng(childarray[1],childarray[2]); 								 
 								drivermarker.setPosition(startPoint);							
 								 map.setCenter(startPoint);
-								if(distance<2000 && countko<=2)
+								if(distance<100 && countko<=2)
 								{
-									alert("YOUR BUS IS NEAR < 60 METRS");
+									alert("YOUR BUS WILL ARRIVE IN 5 MINS");
 									countko=countko+1;
 								}
 							 }
