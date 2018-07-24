@@ -64,7 +64,7 @@ function watchPosition() {
    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
    function onSuccess(position) {
 	   Rootref.set({		   
-		   Cordinates:deviceid+','+position.coords.latitude+','+position.coords.longitude
+		   Cordinates:deviceid+','+position.coords.latitude+','+position.coords.longitude+','+new Date(position.timestamp)
 	   });
 	   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	   marker.setPosition(latlng);	   
